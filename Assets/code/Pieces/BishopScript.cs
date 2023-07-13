@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class King : Piece
+public class Bishop : Piece
 {
-    public PieceType pieceType = PieceType.King;
+    public override PieceType pieceType {get; set;} = PieceType.Bishop;
 
     // Hum how do we handle Castling
     // and En passant
-    public Vector2Int[,] moveset = new Vector2Int[8, 1]
+    public override Vector2Int[,] moveset {get; set;} = new Vector2Int[8, 1]
         {
             { Vector2Int.right }, // Right
             { Vector2Int.left }, // Left

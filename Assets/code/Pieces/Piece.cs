@@ -13,11 +13,11 @@ public enum PieceType
     Pawn
 }
 
-// Makes me wonder if i should have used an ABC instead ...
 public abstract class Piece : MonoBehaviour
 {
-    PieceType pieceType;
-    Vector2[,] moveset;
+    // What is C#'s issue with fields lol !
+    public abstract PieceType pieceType { get; set; }
+    public abstract Vector2Int[,] moveset { get; set; }
     // The idea is that the possible Path for the piece will be 
     // Hard coded in the Class
     // 1st level of List represents all possible paths

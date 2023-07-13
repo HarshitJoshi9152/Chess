@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5760991749989043345}
   - component: {fileID: 5419706935827576769}
   - component: {fileID: 3466390390637024499}
-  - component: {fileID: 3925546362957222024}
-  - component: {fileID: 8446117520329349362}
+  - component: {fileID: -4885591825693572358}
+  - component: {fileID: 240957225094419562}
   m_Layer: 0
-  m_Name: Pawn
+  m_Name: Rook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1228870960, guid: 96b152a69c1dd074d8e814c2fa7c143e, type: 3}
+  m_Sprite: {fileID: 1281554880, guid: 96b152a69c1dd074d8e814c2fa7c143e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,7 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 16}
   m_EdgeRadius: 0
---- !u!114 &3925546362957222024
+--- !u!114 &-4885591825693572358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746731067871904100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0cddd993003bc46b71eecac0d38c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &240957225094419562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,17 +154,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55f1180ed176d5e4fa9b1dd9879d76db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8446117520329349362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746731067871904100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ff7a35cbb1ad9468bb119b99359f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
