@@ -313,6 +313,7 @@ MonoBehaviour:
   KnightPrefab: {fileID: 746731067871904100, guid: f24b2feed2dcf05479ec4baceeca7135, type: 3}
   RookPrefab: {fileID: 746731067871904100, guid: 150478e6f69ea5345bb5724e856444ad, type: 3}
   PawnPrefab: {fileID: 746731067871904100, guid: f0f4276338817434a9279d09a0ab9e13, type: 3}
+  HighlightPrefab: {fileID: 7915186302389158412, guid: 5f96d2a5c7400464ead29068d6467663, type: 3}
 --- !u!1 &2035098749
 GameObject:
   m_ObjectHideFlags: 0

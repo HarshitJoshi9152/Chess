@@ -17,20 +17,9 @@ public class King : Piece
         { new Vector2Int(1, -1) } // Bottom Right
     };
 
-
-    private Vector2Int BoardLocation = Vector2Int.zero;
-
-    //Events
-
-    public event Action<Vector2Int> highlighted;
-
-    public void Init(Vector2Int location)
-    {
-        BoardLocation= location;
-    }
-
     public void Update()
     {
+
     }
 
     // Or maybe i can make a seperate behavior for that behavior... and add it to all the Piece Prefabs..
