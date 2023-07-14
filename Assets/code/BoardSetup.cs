@@ -18,7 +18,6 @@ public class setup : MonoBehaviour
     public GameObject RookPrefab;
     public GameObject PawnPrefab;
 
-
     int BoardHeight = 8;
     int BoardWidth = 8;
 
@@ -41,6 +40,7 @@ public class setup : MonoBehaviour
     public GameObject HighlightPrefab;
 
     List<GameObject> HighligtedSquares = new List<GameObject>();
+    List<Vector2Int> ValidMoves = new List<Vector2Int>();
 
     void Start()
     {
@@ -84,6 +84,7 @@ public class setup : MonoBehaviour
                     // Convert to World Coordinates and Add 
                     Vector2 square_loc = getSquareLocation(square);
 
+                    ValidMoves.Add(square);
                     ValidSquares.Add(square_loc);
                     GameObject highlightSquare = Instantiate(HighlightPrefab, square_loc, Quaternion.identity);
                     HighligtedSquares.Add(highlightSquare);
@@ -95,14 +96,50 @@ public class setup : MonoBehaviour
         return ValidSquares;
     }
     
-    private void onPieceStopHighlight()
+    private bool onPieceStopHighlight(Vector2Int prevPosition, Vector2 position)
     {
+        Debug.Log(prevPosition);
+        Debug.Log(position);
+
         foreach(var highlightSquare in HighligtedSquares)
         {
+            // hmm check if the Piece is in any Valid Positions if its is Change its position on BoardState
             Destroy(highlightSquare);
         }
-
         HighligtedSquares.Clear();
+
+        // Moving piece to next position
+        Vector2Int BoardSquare = positionToBoardSquare(position);
+
+        Debug.Log(position);
+        Debug.Log(BoardSquare);
+
+        foreach (Vector2Int square in ValidMoves)
+        {
+            Debug.Log(square);
+            // Start => -56 + 2 * 16 , 
+            // -
+            /* Pos Before Grab -> -24, -40   | 1, 2 | row Col
+             * -24, -24   -> 2, 2
+             * -24 - -56 => 32 / 16  = 2
+             * -20, -20 Returned Board Position....
+             * 
+             * 
+             * 
+             */
+
+            if (BoardSquare.x == square.x && BoardSquare.y == square.y)
+            {
+                Debug.Log("Equal !");
+                // change Selected Piece Position ...
+                BoardState[square.x, square.y] = BoardState[prevPosition.x, prevPosition.y];
+                BoardState[prevPosition.x, prevPosition.y] = null;
+                ValidMoves.Clear();
+                return true;
+            }
+        }
+        ValidMoves.Clear();
+        return false;
     }
 
     private bool isSquareEmpty(Vector2Int loc)
@@ -110,7 +147,26 @@ public class setup : MonoBehaviour
         return BoardState[loc.x, loc.y] == null;
     }
 
-    private Vector2 getSquareLocation(Vector2Int pos)
+    // Maybe i should just use the Sticking Section in PieceGrabScript...
+    public Vector2Int positionToBoardSquare(Vector2 pos)
+    {
+        float start_x = BottomLeftPiece.transform.position.x;
+        float start_y = BottomLeftPiece.transform.position.y;
+        
+        float x = ((pos.y - start_x) / 16);
+        float y = ((pos.x - start_y) / 16);
+
+        print("pos");
+        print(pos);
+
+
+        print(start_y);
+        print(start_x);
+
+        return new Vector2Int((int)x, (int)y);
+        // Debug.Assert(pos.x < 8 && pos.y < 8 && pos.x >= 0 && pos.y >= 0, "Pos Out of Range !", this.gameObject);
+    }
+    public Vector2 getSquareLocation(Vector2Int pos)
     {
         Debug.Assert(pos.x < 8 && pos.y < 8 && pos.x >= 0 && pos.y >= 0 , "Pos Out of Range !", this.gameObject);
 

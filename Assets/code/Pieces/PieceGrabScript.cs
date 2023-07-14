@@ -16,7 +16,7 @@ public class PieceGrabScript : MonoBehaviour
     /// Sends Own Squares[x, y] and get the list of valid Squares (highlighted)
     /// </summary>
     public event Func<Vector2Int, List<Vector2>> HighlightEvent;
-    public event Action StopHighlightEvent;
+    public event Func<Vector2Int, Vector2, bool> StopHighlightEvent;
     private Vector2Int BoardLocation = Vector2Int.zero;
 
     private List<Vector2> ValidSquares = new List<Vector2>();
@@ -54,6 +54,8 @@ public class PieceGrabScript : MonoBehaviour
                 {
                     if (nextPos.y >= start_y && nextPos.y <= end_y)
                     {
+                        // IDEA; we could store a value here lol.... and just send it to `Board` without having to verify
+                        // If its a Valid Move lol....
                         // Snap to Position... ie center of the square
                         nextPos = new Vector2(square.x, square.y);
                         break;
@@ -67,10 +69,21 @@ public class PieceGrabScript : MonoBehaviour
 
     protected void OnMouseUp()
     {
-        StopHighlightEvent.Invoke();
-
         isGrabbed = false;
-        transform.position = PosBeforeGrab;
+
+        bool displaced = StopHighlightEvent.Invoke(BoardLocation, transform.position);
+        
+        if (displaced)
+        {
+            // Apply new Position to BoardLocation
+            Debug.Log("displaced !!");
+            // BAD DESIGN CHANGE IT !!!
+            Vector2Int newPos = new Vector2Int((int)(transform.position.y - -56) / 16, (int)(transform.position.x - -56) / 16);
+
+            BoardLocation = newPos;
+        }
+        else transform.position = PosBeforeGrab;
+
         GetComponent<Renderer>().sortingOrder = defaultSortingOrder;
         ValidSquares.Clear();
     }
